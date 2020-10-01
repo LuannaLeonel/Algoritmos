@@ -9,6 +9,7 @@ class InsertionSort{
                 arr[j] = arr[j-1];
                 arr[j-1] = aux;
                 j -= 1;
+                
             }
         }
     }
