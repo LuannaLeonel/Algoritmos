@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-class FilaComLinkedList {
+class QueueLinkedList {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -43,6 +43,7 @@ class FilaComLinkedList {
         }
         scan.close();
 	}
+}
 
 class Fila{
     LinkedList list; 
@@ -63,23 +64,22 @@ class Fila{
     
     
    
-    public void enqueue(int x){
-        if(element != null){
-			this.list.insertLast(element);
-		}
+    public void enqueue(int element){
+    
+	    this.list.insertLast(element);
+	
        
     }
     public void element(){
         if(!isEmpty()){
-            System.out.println(this.list.getHead());
+            System.out.println(this.list.getLast());
         } else {
-            System.out.print("empty");
+            System.out.println("empty");
         }
     }
     
     public void dequeue(){
         if(!isEmpty()){
-            tail--;
             list.removeFirst();
         } else {
             System.out.println("empty");
@@ -106,7 +106,7 @@ class LinkedList {
     public boolean isEmpty(){
         return this.head == null;
     }
-    public insertLast(int e){
+    public void insertLast(int e){
         if (this.isEmpty()){
             head = new Node(e);
         } else {
@@ -115,10 +115,19 @@ class LinkedList {
         }
         
     }
-    public Node getHead() {
-        return head;
+    public int getLast() {
+        
+        return  recursiveTail(this.head);
     }
-    private recursiveLast(Node current,int e){
+    private int recursiveTail(Node current){
+        if(current.next == null){
+            return current.getValue();
+        } else {
+            return recursiveTail(current.next);
+        }
+        
+    }
+    private void recursiveLast(Node current,int e){
         if(current.next == null){
             Node newNode = new Node(e);
             current.next = newNode;
@@ -129,13 +138,11 @@ class LinkedList {
     public void removeFirst(){
         if(!this.isEmpty()){
 			if(this.head.next == null) {
-				this.setData(null);
-				this.setPrevious(null);
-				this.setNext(null);
+                this.head = null;
+				
 			} else {
 				this.head = (this.head.next);
-                this.head.next = (this.head.next.next);
-                this.head.next = this.head;
+                this.head.previous = null;
             }
         }
     }
@@ -143,27 +150,40 @@ class LinkedList {
         return recursiveSearch(this.head, element);
     }
     private int recursiveSearch(Node current, int e){
-        int res = -1;
+        if (!this.contains(current, e)){
+            return -1;
+        }
+        
         
         if(current.getValue() == e){
-            res += 1;
+            return 0;
         } else {
-            if (current.next == null){
-                return -1;
-            }
-            res += recursiveSearch(current.next, e);
+        
+            return 1 + recursiveSearch(current.next, e);
         }
-        return res;
+        
     }
+    private boolean contains(Node current,int e){
+        if (current == null) return false;
+
+
+        if(current.getValue() == e){
+            return true;
+        } else {
+            return contains(current.next, e);
+        }
+    }
+
     public String toString(){
         return toStringRecursivo(this.head).trim();
     }
     private String toStringRecursivo(Node current){
         String res = "";
-        if (!this.isEmpty()){
+        if (!this.isEmpty() && current != null){
             if (current.next == null){
-                res +=  String.valueOf(current.getValue()) + " ";
+                res +=  String.valueOf(current.getValue());
             } else {
+                res +=  String.valueOf(current.getValue()) + " ";
                 res += toStringRecursivo(current.next);
             }
         }
@@ -175,18 +195,25 @@ class LinkedList {
 class Node{
     Node next;
     Node previous;
-    private int value;
+    private Integer value;
     
-    public Node(int v){
+    public Node(Integer v){
         this.next = null;
         this.previous = null;
         this.value = v;
     }
     
-    public int getValue() {
+    public Integer getValue() {
         return value;
     }
-
-}
+    public void setValue(Integer value) {
+        this.value = value;
+    }
+    public void setPrevious(Node previous) {
+        this.previous = previous;
+    }
+    public void setNext(Node next) {
+        this.next = next;
+    }
 
 }
