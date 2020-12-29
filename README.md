@@ -1,2 +1,2 @@
-# Algoritimos
-Algoritimos de ordenação implementados em Java e em Python
+# Algoritmos
+Algoritmos de ordenação implementados em Java e em Python
