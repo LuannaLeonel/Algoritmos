@@ -4,4 +4,6 @@
 de uma coleção trocando de lugar o elemento maior ou menor, dependendo de ordenação
 crescente ou decrescente.
   Esse algoritmo é da ordem **O(n)**, pois sempre percorrerá todos os *n* elementos da coleção.
+
+
 ![bubblesort gif example](https://upload.wikimedia.org/wikipedia/commons/0/06/Bubble-sort.gif)
