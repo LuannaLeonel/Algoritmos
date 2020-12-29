@@ -1,0 +1,6 @@
+# BUBBLESORT
+
+  O bubble sort é um algorítmo de ordenação que passa por todos os elementos 
+de uma coleção trocando de lugar o elemento maior ou menor, dependendo de ordenação
+crescente ou decrescente.
+  Esse algoritmo é da ordem **O(n)**, pois sempre percorrerá todos os *n* elementos da coleção.
